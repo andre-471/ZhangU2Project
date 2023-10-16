@@ -5,15 +5,17 @@ public class LinearEquationLogic {
     private LinearEquation equation;
     public LinearEquationLogic() {
         equation = null;
+        start();
     }
 
     public void start() {
         System.out.println("welcome");
+        getInput();
     }
     public int[] coordParser(String coord) {
         int mid = coord.indexOf(",");
-        return new int[]{Integer.parseInt(coord.substring(1, mid)),
-                Integer.parseInt(coord.substring(mid + 1, coord.length() - 1))};
+        return new int[]{Integer.parseInt(coord.substring(1, mid).trim()),
+                Integer.parseInt(coord.substring(mid + 1, coord.length() - 1).trim())};
     }
 
     private void getInput() {
@@ -25,7 +27,8 @@ public class LinearEquationLogic {
 
             System.out.println(equation.lineInfo());
 
-
+            System.out.println(equation.coordinateForX(scan.nextDouble()));
+            scan.nextLine();
             System.out.print("y/n");
         } while ("y".equals(scan.nextLine()));
     }
