@@ -11,8 +11,9 @@ public class LinearEquationLogic {
     }
 
     private void start() {
-        System.out.println("welcome");
+        System.out.println("Welcome to the linear equation calculator!");
         getInput();
+        System.out.println("Thank you for using the slope calculator, goodbye!");
     }
 
     private void getInput() {
@@ -23,15 +24,16 @@ public class LinearEquationLogic {
             String coord2 = scan.nextLine();
             createLinearEquaation(coord1, coord2);
 
+            System.out.println();
             System.out.println(equation.lineInfo());
 
             if (!Double.isNaN(equation.slope())) {
-                System.out.print("Enter a value for x: ");
-                System.out.println("The point on the line is " + equation.coordinateForX(scan.nextDouble()));
+                System.out.print("\nEnter a value for x: ");
+                System.out.println("\nThe point on the line is " + equation.coordinateForX(scan.nextDouble()));
                 scan.nextLine();
             }
 
-            System.out.print("Would you like to enter another pair of coordinates? y/n: ");
+            System.out.print("\nWould you like to enter another pair of coordinates? y/n: ");
         } while ("y".equalsIgnoreCase(scan.nextLine()));
     }
 

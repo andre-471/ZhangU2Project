@@ -58,7 +58,7 @@ public class LinearEquation {
 
     public String equation() {
         if (Double.isNaN(slope())) { return "undefined"; }
-        if (y1 == y2) { return "y = " + (yIntercept()); }
+        if (y1 == y2) { return "y = " + (int) yIntercept(); }
 
         return "y = " + slopeFormatter() + yInterceptFormatter();
     }
