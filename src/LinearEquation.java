@@ -16,6 +16,7 @@ public class LinearEquation {
     }
 
     public double yIntercept() {
+        if (Double.isNaN(slope())) { return Double.NaN; }
         return roundedToHundredth(y1 - (slope() * x1));  // y = mx + b -> b = y - mx
     }
 
@@ -38,7 +39,7 @@ public class LinearEquation {
         if (Math.abs(slope()) == 1) {
             return slopeCoefficient + "x";  // slope is 1 or -1, return x or -x
         } else if (deltaY % deltaX == 0) {  // equally divides
-            slopeCoefficient += deltaY / deltaX;
+            slopeCoefficient += (int) Math.abs(slope());
         } else {
             slopeCoefficient += simplifyFraction(Math.abs(deltaY), Math.abs(deltaX));
         }
@@ -56,14 +57,14 @@ public class LinearEquation {
     }
 
     public String equation() {
-        if (x1 == x2) { return "undefined"; }
+        if (Double.isNaN(slope())) { return "undefined"; }
         if (y1 == y2) { return "y = " + (yIntercept()); }
 
         return "y = " + slopeFormatter() + yInterceptFormatter();
     }
 
     public String coordinateForX(double x) {
-        double y = (slope() * x) + yIntercept();
+        double y = roundedToHundredth((slope() * x) + yIntercept());
         return "(" + x + ", " + y + ")";
     }
 
