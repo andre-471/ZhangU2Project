@@ -12,15 +12,15 @@ public class LinearEquation {
     }
 
     public double distance() {
-        return roundedToHundredth(Math.pow(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2), 0.5));
+        return roundedToHundredth(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
     }
 
     public double yIntercept() {
-        return roundedToHundredth(y1 - (slope() * x1));
+        return roundedToHundredth(y1 - (slope() * x1));  // y = mx + b -> b = y - mx
     }
 
     public double slope() {
-        if (x1 == x2) { return Double.NaN; }
+        if (x1 == x2) { return Double.NaN; }  // vertical line
         return roundedToHundredth((double) (y2 - y1) / (x2 - x1));
     }
 
@@ -31,13 +31,13 @@ public class LinearEquation {
 
         if (slope() == 0) {
             return "";
-        } else if (slope() < 0) {
+        } else if (slope() < 0) {  // negative slope
             slopeCoefficient += "-";
         }
 
         if (Math.abs(slope()) == 1) {
-            return slopeCoefficient + "x";
-        } else if (deltaY % deltaX == 0) {
+            return slopeCoefficient + "x";  // slope is 1 or -1, return x or -x
+        } else if (deltaY % deltaX == 0) {  // equally divides
             slopeCoefficient += deltaY / deltaX;
         } else {
             slopeCoefficient += simplifyFraction(Math.abs(deltaY), Math.abs(deltaX));
@@ -54,6 +54,7 @@ public class LinearEquation {
         }
         return " + " + yIntercept();
     }
+
     public String equation() {
         if (x1 == x2) { return "undefined"; }
         if (y1 == y2) { return "y = " + (yIntercept()); }
@@ -79,9 +80,9 @@ public class LinearEquation {
     }
 
     private String simplifyFraction(int numerator, int denominator) {
-        int i = 2;
+        int i = 2;  // 1 would be a factor of all numbers in set of all natural numbers excluding 0
 
-        while (i < Math.min(numerator, denominator)) {  // i can't be equal numerator or denominator
+        while (i < Math.min(numerator, denominator)) {  // i can't be equal to numerator or denominator
             if (numerator % i == 0 && denominator % i == 0) {  // if i is a factor
                 // simplify using i as factor
                 numerator /= i;
